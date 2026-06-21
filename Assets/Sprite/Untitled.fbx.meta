@@ -1,0 +1,295 @@
+fileFormatVersion: 2
+guid: d9b02048c5632464ab0e67e4377456b2
+ModelImporter:
+  serializedVersion: 24200
+  internalIDToNameTable: []
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CarTex_1
+    second: {fileID: 2100000, guid: 096f952bbba663946856575864f2b623, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CityGenBark.001
+    second: {fileID: 2100000, guid: 2747aec593e3ddb4d8e12f35b4022564, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CityGenBark.002
+    second: {fileID: 2100000, guid: 3989db28186ce7b44a6c02d835c70ca3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CityGenBark.003
+    second: {fileID: 2100000, guid: 13afd688364b73e4caaefed22cbf3699, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CityGenBrick_Wall.001
+    second: {fileID: 2100000, guid: add2d68725b55ce41899a799f1b7bdff, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CityGenGlass.001
+    second: {fileID: 2100000, guid: 92eef37a21f5b07438669294f5058188, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CityGenTCom_DecalsStain0047_1_masked_S
+    second: {fileID: 2100000, guid: 0960c52b61fe0c2459c5edac079b2074, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CityGenTCom_DecalsStain0057_1_masked_S
+    second: {fileID: 2100000, guid: 125f5df2bdc63e64eb2a13408260897b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CityGenTCom_DecalsStain0094_2_masked_S
+    second: {fileID: 2100000, guid: af4e03acdf5f3a348b4139ad497af485, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CityGenWetFloorSign_01.001
+    second: {fileID: 2100000, guid: bfa3c9ef30d78ba448f934aecddaf94c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CityGen_Curb
+    second: {fileID: 2100000, guid: 505709a9683e06446b55d69a5d03159c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CityGen_Streets
+    second: {fileID: 2100000, guid: d367c0d40c245b648942f69f010a2015, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CityGen_lanes_secondary_color
+    second: {fileID: 2100000, guid: daab9e845174a5e4481cbeb64f2d7514, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CityGen_lanes_white
+    second: {fileID: 2100000, guid: 64f74ef99589d324babb42e7bb5f0358, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CityGenbasic_dark_green
+    second: {fileID: 2100000, guid: fa24e7f345a7967458ad5b9bea79cf15, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CityGenbasic_metal.001
+    second: {fileID: 2100000, guid: ba68a06fcfaa2fe488abda4e7d5b6903, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CityGenblack_.001
+    second: {fileID: 2100000, guid: e0d2aa294b9c051449b98aa51c212319, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CityGenconcrete.001
+    second: {fileID: 2100000, guid: b534a50a1ea5f1743b7be695aca0bd6c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CityGenmetal_trash_can_rust
+    second: {fileID: 2100000, guid: 161bfff6388935649804156c86185e3e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CityGenroof.001
+    second: {fileID: 2100000, guid: 590612a14d61a274da6e232eabf771c2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CityGenroof.002
+    second: {fileID: 2100000, guid: bcf0fa34d9316fa40ad55c280b508bd2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CityGenroof.003
+    second: {fileID: 2100000, guid: 502d97c15e3ef76479ca22499c24a5c6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CityGenside_walks
+    second: {fileID: 2100000, guid: fc76d7af60e56f343b507a4ee720699b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CityGentextured_metal
+    second: {fileID: 2100000, guid: 26b039ce97c371d4ca86773596b599f1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FoliageTrees.001
+    second: {fileID: 2100000, guid: a3d0f57ac1099ff4497c56aa28140a07, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FoliageTrees.002
+    second: {fileID: 2100000, guid: 5e5665174b5d6e14b8350a9dfd2d5fe6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FoliageTrees.003
+    second: {fileID: 2100000, guid: 50f784b0ab31c134c97a2f20e5845ea5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FoliageTrees.004
+    second: {fileID: 2100000, guid: 6aa33c8a36ddba444bc460a41a24e6cd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.001
+    second: {fileID: 2100000, guid: 902764de67583a640a470b703c781f56, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Street_Assets
+    second: {fileID: 2100000, guid: 7b61d7adf09086543b1928c010a1b84c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Street_Assets.001
+    second: {fileID: 2100000, guid: 1ca3e86a01cc8b143b8b4d891cf85cf9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: US_Doors_1
+    second: {fileID: 2100000, guid: c69e4de9266af9845afff79e12418b72, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Us_Builds_facadesWalls.001
+    second: {fileID: 2100000, guid: 5989b44b594b00d428661719eaf28fc8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: WheelTex
+    second: {fileID: 2100000, guid: 264ba1d883ee06a4289a7e55d77c1ca6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: material
+    second: {fileID: 2100000, guid: 913daa55e549bdb4bb6ccf559956af56, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: material_0
+    second: {fileID: 2100000, guid: 8dfab8973071f0f41919adc2cb0e78e9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: material_34
+    second: {fileID: 2100000, guid: 340526fb7cae8484e86f76af819f69f1, type: 2}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importPhysicalCameras: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    generateMeshLods: 0
+    meshLodGenerationFlags: 0
+    maximumMeshLod: -1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    strictVertexDataChecks: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
