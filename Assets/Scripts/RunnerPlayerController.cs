@@ -4,34 +4,40 @@ using UnityEngine;
 public class RunnerPlayerController : MonoBehaviour
 {
     [Header("References")]
-    public RunnerGameManager gameManager;
-    public Animator animator;
+    [SerializeField] private RunnerGameManager gameManager;
+    [SerializeField] private Animator animator;
+
+    [Header("Forward Movement")]
+    [SerializeField] private float forwardSpeed = 8f;
 
     [Header("Lane Settings")]
-    public float laneWidth = 3f;
-    public float laneChangeSpeed = 12f;
+    [SerializeField] private float laneCenterX = 29.42f;
+    [SerializeField] private float laneDistance = 3f;
+    [SerializeField] private float laneChangeSpeed = 10f;
 
-    [Header("Movement")]
-    public float gravity = -25f;
+    [Header("Gravity")]
+    [SerializeField] private float gravity = -20f;
 
-    [Header("Collision")]
-    public string obstacleTag = "Obstacle";
+    private CharacterController characterController;
 
-    private CharacterController controller;
-    private int targetLane = 1; // 0 = Left, 1 = Middle, 2 = Right
+    // 0 = Left
+    // 1 = Middle
+    // 2 = Right
+    private int currentLane = 1;
+
     private float verticalVelocity;
     private bool isDead;
 
     private void Awake()
     {
-        controller = GetComponent<CharacterController>();
-
-        if (animator == null)
-            animator = GetComponentInChildren<Animator>();
+        characterController = GetComponent<CharacterController>();
     }
 
     private void Start()
     {
+        // شروع بازی از نزدیک‌ترین لاین نسبت به موقعیت فعلی Player
+        currentLane = GetClosestLane();
+
         if (animator != null)
         {
             animator.SetBool("IsRunning", true);
@@ -43,57 +49,86 @@ public class RunnerPlayerController : MonoBehaviour
         if (isDead || gameManager == null || gameManager.IsGameOver)
             return;
 
-        HandleInput();
+        HandleLaneInput();
         MovePlayer();
     }
 
-    private void HandleInput()
+    private void HandleLaneInput()
     {
-        if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
-            MoveLeft();
+        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            currentLane--;
+            currentLane = Mathf.Clamp(currentLane, 0, 2);
+        }
 
-        if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
-            MoveRight();
-    }
-
-    public void MoveLeft()
-    {
-        if (targetLane > 0)
-            targetLane--;
-    }
-
-    public void MoveRight()
-    {
-        if (targetLane < 2)
-            targetLane++;
+        if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            currentLane++;
+            currentLane = Mathf.Clamp(currentLane, 0, 2);
+        }
     }
 
     private void MovePlayer()
     {
-        float targetX = (targetLane - 1) * laneWidth;
+        // محاسبه خودکار X لاین مقصد
+        float targetX = laneCenterX + ((currentLane - 1) * laneDistance);
 
+        // حرکت نرم به چپ و راست
         float newX = Mathf.MoveTowards(
             transform.position.x,
             targetX,
             laneChangeSpeed * Time.deltaTime
         );
 
-        float deltaX = newX - transform.position.x;
+        float horizontalMovement = newX - transform.position.x;
 
-        if (controller.isGrounded && verticalVelocity < 0)
-            verticalVelocity = -1f;
+        // Gravity
+        if (characterController.isGrounded && verticalVelocity < 0f)
+        {
+            verticalVelocity = -2f;
+        }
 
         verticalVelocity += gravity * Time.deltaTime;
 
-        float forwardSpeed = gameManager.CurrentSpeed;
+        // سرعت بازی
+        float currentForwardSpeed = forwardSpeed;
 
-        Vector3 move = new Vector3(
-            deltaX,
+        if (gameManager != null)
+        {
+            currentForwardSpeed = gameManager.CurrentSpeed;
+        }
+
+        Vector3 movement = new Vector3(
+            horizontalMovement,
             verticalVelocity * Time.deltaTime,
-            forwardSpeed * Time.deltaTime
+            currentForwardSpeed * Time.deltaTime
         );
 
-        controller.Move(move);
+        characterController.Move(movement);
+    }
+
+    private int GetClosestLane()
+    {
+        float leftLaneX = laneCenterX - laneDistance;
+        float middleLaneX = laneCenterX;
+        float rightLaneX = laneCenterX + laneDistance;
+
+        float distanceToLeft = Mathf.Abs(transform.position.x - leftLaneX);
+        float distanceToMiddle = Mathf.Abs(transform.position.x - middleLaneX);
+        float distanceToRight = Mathf.Abs(transform.position.x - rightLaneX);
+
+        if (distanceToLeft < distanceToMiddle &&
+            distanceToLeft < distanceToRight)
+        {
+            return 0;
+        }
+
+        if (distanceToRight < distanceToMiddle)
+        {
+            return 2;
+        }
+
+        return 1;
     }
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
@@ -101,7 +136,7 @@ public class RunnerPlayerController : MonoBehaviour
         if (isDead)
             return;
 
-        if (hit.collider.CompareTag(obstacleTag))
+        if (hit.gameObject.CompareTag("Obstacle"))
         {
             Die();
         }
@@ -117,6 +152,9 @@ public class RunnerPlayerController : MonoBehaviour
             animator.SetTrigger("Hit");
         }
 
-        gameManager.GameOver();
+        if (gameManager != null)
+        {
+            gameManager.GameOver();
+        }
     }
 }
