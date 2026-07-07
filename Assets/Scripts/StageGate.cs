@@ -1,37 +1,48 @@
 using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider))]
-[RequireComponent(typeof(Rigidbody))]
 public class StageGate : MonoBehaviour
 {
-    public RunnerGameManager gameManager;
-    public int stageNumber = 1;
+    [SerializeField] private RunnerGameManager gameManager;
 
-    private bool triggered;
+    private bool hasTriggered;
 
     private void Awake()
     {
         BoxCollider boxCollider = GetComponent<BoxCollider>();
+
         boxCollider.isTrigger = true;
 
         Rigidbody rb = GetComponent<Rigidbody>();
+
+        if (rb == null)
+        {
+            rb = gameObject.AddComponent<Rigidbody>();
+        }
+
         rb.isKinematic = true;
         rb.useGravity = false;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (triggered)
+        if (hasTriggered)
             return;
 
-        RunnerPlayerController player = other.GetComponent<RunnerPlayerController>();
+        if (!other.CompareTag("Player"))
+            return;
 
-        if (player != null)
+        hasTriggered = true;
+
+        if (gameManager != null)
         {
-            triggered = true;
-
-            if (gameManager != null)
-                gameManager.CompleteStage(stageNumber);
+            gameManager.CompleteStage();
+        }
+        else
+        {
+            Debug.LogWarning(
+                "GameManager is not connected to StageGate!"
+            );
         }
     }
 }

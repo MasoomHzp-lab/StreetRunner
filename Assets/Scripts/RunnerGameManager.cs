@@ -1,54 +1,121 @@
+using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using TMPro;
 
 public class RunnerGameManager : MonoBehaviour
 {
-    [Header("Speed Settings")]
-    public float startSpeed = 8f;
-    public float speedIncreasePerStage = 2f;
+    [Header("Stage Speeds")]
+    [SerializeField] private float stage1Speed = 8f;
+    [SerializeField] private float stage2Speed = 10f;
+    [SerializeField] private float stage3Speed = 12f;
 
-    [Header("Stage Settings")]
-    public int currentStage = 1;
-    public int maxStage = 3;
+    [Header("Stage Message UI")]
+    [SerializeField] private GameObject stageMessagePanel;
+    [SerializeField] private TMP_Text stageMessageText;
+    [SerializeField] private float stageMessageDuration = 2f;
 
-    [Header("UI")]
-    public GameObject gameOverPanel;
-    public GameObject winPanel;
+    [Header("Win / Lose UI")]
+    [SerializeField] private GameObject winPanel;
+    [SerializeField] private GameObject losePanel;
+
+    [Header("Lose Settings")]
+    [SerializeField] private float losePanelDelay = 2f;
+
+    private int currentStage = 1;
+
+    private Coroutine stageMessageCoroutine;
 
     public float CurrentSpeed { get; private set; }
+
     public bool IsGameOver { get; private set; }
-    public bool IsWin { get; private set; }
 
-    private void Awake()
+    private void Start()
     {
-        CurrentSpeed = startSpeed;
+        CurrentSpeed = stage1Speed;
+        IsGameOver = false;
 
-        if (gameOverPanel != null)
-            gameOverPanel.SetActive(false);
+        // مخفی کردن پیام Stage
+        if (stageMessagePanel != null)
+        {
+            stageMessagePanel.SetActive(false);
+        }
 
+        // مخفی کردن پنل برد
         if (winPanel != null)
+        {
             winPanel.SetActive(false);
+        }
+
+        // مخفی کردن پنل باخت
+        if (losePanel != null)
+        {
+            losePanel.SetActive(false);
+        }
     }
 
-    public void CompleteStage(int stageNumber)
+    public void CompleteStage()
     {
-        if (IsGameOver || IsWin)
+        if (IsGameOver)
             return;
 
-        if (stageNumber != currentStage)
-            return;
-
-        if (currentStage < maxStage)
+        // پایان Stage 1
+        if (currentStage == 1)
         {
-            currentStage++;
-            CurrentSpeed += speedIncreasePerStage;
+            currentStage = 2;
+            CurrentSpeed = stage2Speed;
 
-            Debug.Log("Stage Complete. New Stage: " + currentStage + " Speed: " + CurrentSpeed);
+            ShowStageMessage(2);
+
+            return;
         }
-        else
+
+        // پایان Stage 2
+        if (currentStage == 2)
+        {
+            currentStage = 3;
+            CurrentSpeed = stage3Speed;
+
+            ShowStageMessage(3);
+
+            return;
+        }
+
+        // پایان Stage 3
+        if (currentStage == 3)
         {
             WinGame();
         }
+    }
+
+    private void ShowStageMessage(int newStage)
+    {
+        if (stageMessageCoroutine != null)
+        {
+            StopCoroutine(stageMessageCoroutine);
+        }
+
+        stageMessageCoroutine = StartCoroutine(
+            ShowStageMessageRoutine(newStage)
+        );
+    }
+
+    private IEnumerator ShowStageMessageRoutine(int newStage)
+    {
+        if (stageMessagePanel == null || stageMessageText == null)
+        {
+            yield break;
+        }
+
+        stageMessageText.text =
+            "تبریک!\nشما به مرحله " + newStage + " راه یافتید";
+
+        stageMessagePanel.SetActive(true);
+
+        yield return new WaitForSeconds(stageMessageDuration);
+
+        stageMessagePanel.SetActive(false);
+
+        stageMessageCoroutine = null;
     }
 
     public void GameOver()
@@ -57,30 +124,39 @@ public class RunnerGameManager : MonoBehaviour
             return;
 
         IsGameOver = true;
+
+        // توقف حرکت Player
         CurrentSpeed = 0f;
 
-        if (gameOverPanel != null)
-            gameOverPanel.SetActive(true);
-
-        Debug.Log("Game Over");
+        // نمایش پنل با تأخیر
+        StartCoroutine(ShowLosePanelRoutine());
     }
 
-    public void WinGame()
+    private IEnumerator ShowLosePanelRoutine()
     {
-        if (IsWin)
+        // صبر برای پخش انیمیشن افتادن
+        yield return new WaitForSeconds(losePanelDelay);
+
+        if (losePanel != null)
+        {
+            losePanel.SetActive(true);
+        }
+    }
+
+    private void WinGame()
+    {
+        if (IsGameOver)
             return;
 
-        IsWin = true;
+        IsGameOver = true;
+
+        // توقف Player
         CurrentSpeed = 0f;
 
+        // نمایش پنل برد
         if (winPanel != null)
+        {
             winPanel.SetActive(true);
-
-        Debug.Log("You Win");
-    }
-
-    public void RestartGame()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
     }
 }
