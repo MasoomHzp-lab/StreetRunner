@@ -2,36 +2,33 @@ using UnityEngine;
 
 public class MovingObstacle : MonoBehaviour
 {
-    [Header("Horizontal Movement")]
-    [SerializeField] private float centerX = 29.42f;
-    [SerializeField] private float moveRange = 3f;
+    [Header("Movement Settings")]
+    [SerializeField] private float moveDistance = 3f;
     [SerializeField] private float moveSpeed = 2f;
 
-    private float minX;
-    private float maxX;
+    private float startX;
+
 
     private void Start()
     {
-        // سمت چپ جاده
-        minX = centerX - moveRange;
-
-        // سمت راست جاده
-        maxX = centerX + moveRange;
+        // محل اولیه مانع را ذخیره می‌کنیم
+        startX = transform.position.x;
     }
+
 
     private void Update()
     {
-        // ساخت حرکت رفت و برگشتی بین 0 و 1
-        float t = Mathf.PingPong(Time.time * moveSpeed, 1f);
+        // حرکت رفت و برگشتی روی محور X
+        float offset = Mathf.PingPong(
+            Time.time * moveSpeed,
+            moveDistance * 2f
+        ) - moveDistance;
 
-        // محاسبه موقعیت X بین چپ و راست
-        float newX = Mathf.Lerp(minX, maxX, t);
 
-        // فقط X تغییر می‌کند
-        transform.position = new Vector3(
-            newX,
-            transform.position.y,
-            transform.position.z
-        );
+        Vector3 newPosition = transform.position;
+
+        newPosition.x = startX + offset;
+
+        transform.position = newPosition;
     }
 }

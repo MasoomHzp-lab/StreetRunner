@@ -4,6 +4,8 @@ using TMPro;
 
 public class MainMenuManager : MonoBehaviour
 {
+    [SerializeField] private GameObject aboutPanel;
+
     [Header("Mute UI")]
     [SerializeField] private TMP_Text muteButtonText;
 
@@ -53,4 +55,20 @@ public class MainMenuManager : MonoBehaviour
 
         muteButtonText.text = isMuted ? "UNMUTE" : "MUTE";
     }
+    public void OpenAbout()
+{
+    if (aboutPanel != null)
+    {
+        aboutPanel.SetActive(true);
+    }
+}
+
+
+public void CloseAbout()
+{
+    if (aboutPanel != null)
+    {
+        aboutPanel.SetActive(false);
+    }
+}
 }

@@ -4,6 +4,21 @@ using TMPro;
 
 public class RunnerGameManager : MonoBehaviour
 {
+    [Header("Sound Effects")]
+    [SerializeField] private AudioSource sfxSource;
+    [SerializeField] private AudioClip coinSound;
+    [SerializeField] private AudioClip hitSound;
+
+    [Header("Coin System")]
+    [SerializeField] private TMP_Text coinText;
+    [SerializeField] private TMP_Text highScoreText;
+
+    private int collectedCoins = 0;
+    private int highScore = 0;
+
+    private const int totalCoins = 21;
+    private const string HighScoreKey = "HighScore";
+
     [Header("Stage Speeds")]
     [SerializeField] private float stage1Speed = 8f;
     [SerializeField] private float stage2Speed = 10f;
@@ -33,6 +48,16 @@ public class RunnerGameManager : MonoBehaviour
     {
         CurrentSpeed = stage1Speed;
         IsGameOver = false;
+
+        collectedCoins = 0;
+
+        highScore = PlayerPrefs.GetInt(
+            HighScoreKey,
+            0
+        );
+
+        UpdateCoinText();
+        UpdateHighScoreText();
 
         // مخفی کردن پیام Stage
         if (stageMessagePanel != null)
@@ -107,7 +132,7 @@ public class RunnerGameManager : MonoBehaviour
         }
 
         stageMessageText.text =
-            "تبریک!\nشما به مرحله " + newStage + " راه یافتید";
+    "Congratulations!\nYou have reached Stage " + newStage + "!";
 
         stageMessagePanel.SetActive(true);
 
@@ -157,6 +182,65 @@ public class RunnerGameManager : MonoBehaviour
         if (winPanel != null)
         {
             winPanel.SetActive(true);
+        }
+    }
+
+    public void CollectCoin()
+{
+    collectedCoins++;
+
+        if (sfxSource != null && coinSound != null)
+    {
+        sfxSource.PlayOneShot(coinSound);
+    }
+
+    // اگر رکورد جدید ثبت شد
+    if (collectedCoins > highScore)
+    {
+            highScore = collectedCoins;
+
+            PlayerPrefs.SetInt(
+                HighScoreKey,
+                highScore
+            );
+
+            PlayerPrefs.Save();
+
+            UpdateHighScoreText();
+        }
+
+        UpdateCoinText();
+    }
+
+
+    private void UpdateCoinText()
+    {
+        if (coinText != null)
+        {
+            coinText.text =
+                "COINS: " +
+                collectedCoins +
+                " / " +
+                totalCoins;
+        }
+    }
+
+
+    private void UpdateHighScoreText()
+    {
+        if (highScoreText != null)
+        {
+            highScoreText.text =
+                "HIGH SCORE: " +
+                highScore;
+        }
+    }
+
+    public void PlayHitSound()
+    {
+        if (sfxSource != null && hitSound != null)
+        {
+            sfxSource.PlayOneShot(hitSound);
         }
     }
 }
